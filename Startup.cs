@@ -28,6 +28,8 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen();
+            
             services.AddDbContext<ApiDbContext>(options =>
                                             options.UseSqlServer(Configuration.GetConnectionString("Connectionstring")));
             services.AddScoped(typeof(ApiDbContext));
@@ -43,8 +45,8 @@ namespace TodoApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoApi v1"));
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Adventure Works 2014 API v1.0"));
             }
 
             app.UseHttpsRedirection();
